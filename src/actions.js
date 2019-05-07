@@ -15,6 +15,19 @@ export const getUsersList = () =>({
 
 })
 
+export const FETCH_A_USERS_REQUEST =  'FETCH_A_USERS_REQUEST'
+export const FETCH_A_USERS_SUCCESS =  'FETCH_A_USERS_SUCCESS'
+export const FETCH_A_USERS_FAILURE =  'FETCH_A_USERS_FAILURE'
+export const getSpecificUsers = (userName) =>({
+    type:API_CALL,
+    method:'GET',
+    endpoint:`https://api.github.com/users/${userName}`,
+    onRequest:FETCH_A_USERS_REQUEST,
+    onSuccess:FETCH_A_USERS_SUCCESS,
+    onFailure:FETCH_A_USERS_FAILURE
+
+})
+
 export const FILTER_USERS_LIST = 'FILTER_USERS_LIST'
 
 export const FETCH_USER_GISTS_REQUEST =  'FETCH_USER_GISTS_REQUEST'

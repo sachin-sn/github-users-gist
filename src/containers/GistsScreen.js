@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Col, Row} from 'react-bootstrap'
+import {Col, Row,Alert} from 'react-bootstrap'
 import GistItem from './GistItems'
 import {getGistsForks, FETCH_GISTS_FORKS_SELECTED} from '../actions'
 
@@ -10,11 +10,16 @@ const GistsScreen = (props) => {
             <Row>
                 <Col md={12}>
                     {
+                        props.gistItems.length > 0 ?
                         props.gistItems.map((gist,index)=>
                         <div key={index}>
                             <GistItem {...gist} onClick={props.ShowGistDetails}/>
                         </div>
                         )
+                        :
+                        <div>
+                            <Alert variant='warning'> No gists by this user!...</Alert>
+                        </div>
                     }
                 </Col>
             </Row>

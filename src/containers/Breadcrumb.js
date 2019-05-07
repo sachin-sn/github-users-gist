@@ -5,7 +5,6 @@ import {Button} from 'react-bootstrap'
 import Home from '../home.svg'
 
 const Breadcrumb = (props) => {
-    console.log(props)
     return(
         <div style={{fontSize:'20px'}}>
         

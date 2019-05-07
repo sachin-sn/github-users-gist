@@ -9,9 +9,13 @@ FETCH_GISTS_FORKS_FAILURE,
 FETCH_GISTS_FORKS_SUCCESS,
 FETCH_GISTS_FORKS_REQUEST,
 FETCH_GISTS_FORKS_SELECTED,
+FETCH_A_USERS_FAILURE,
+FETCH_A_USERS_SUCCESS,
+FETCH_A_USERS_REQUEST,
 SHOW_SCREEN} from './actions'
 
 export default (state={showScreen:'Users'}, action)=>{
+    console.log(action)
     switch(action.type) {
         case FETCH_GISTS_FORKS_SELECTED:{
             return{
@@ -19,6 +23,7 @@ export default (state={showScreen:'Users'}, action)=>{
             selectedGist:action.gist
         }
         }
+        case FETCH_A_USERS_REQUEST:
         case FETCH_GISTS_FORKS_REQUEST:
         case FETCH_USER_GISTS_REQUEST:   
         case FETCH_USERS_LIST_REQUEST:{
@@ -27,13 +32,15 @@ export default (state={showScreen:'Users'}, action)=>{
                 showSpinner: true
             }
         }
+        case FETCH_A_USERS_FAILURE:
         case FETCH_USER_GISTS_FAILURE:
         case FETCH_GISTS_FORKS_FAILURE:
         case FETCH_USERS_LIST_FAILURE:{
             return {
                 ...state,
                 showSpinner:false,
-                showScreen:'Users'
+                showScreen:'Users',
+                filteredUserList:null
             }
         }
         case FETCH_USERS_LIST_SUCCESS:{
@@ -41,6 +48,15 @@ export default (state={showScreen:'Users'}, action)=>{
                 ...state,
                 showSpinner:false,
                 usersList:action.response
+            }
+        }
+        case FETCH_A_USERS_SUCCESS:{
+            let filteredList = state.filteredList || []
+            filteredList.push(action.response)
+            return{
+                ...state,
+                showSpinner:false,
+                filteredUserList:[...filteredList]
             }
         }
         case FILTER_USERS_LIST:{
